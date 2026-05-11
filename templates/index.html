@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeadHunter — Business Lead Scraper</title>
+  <meta name="description" content="Find business leads instantly. Enter a keyword and city to scrape Google Maps for business names, phone numbers, addresses, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <!-- ── HERO HEADER ── -->
+  <header class="hero">
+    <div class="hero-bg">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="badge">🚀 AI-Powered Lead Generation</div>
+      <h1>LeadHunter</h1>
+      <p class="subtitle">Scrape real business leads from Google Maps in seconds.<br>Names · Phones · Addresses · Ratings · Websites</p>
+    </div>
+  </header>
+
+  <!-- ── SEARCH CARD ── -->
+  <main>
+    <section class="search-section">
+      <div class="card glass">
+        <h2 class="card-title">🔍 Find Leads</h2>
+        <div class="form-grid">
+          <div class="input-group">
+            <label for="keyword">Business Type / Keyword</label>
+            <input type="text" id="keyword" placeholder="e.g. restaurants, dentists, gyms…" autocomplete="off" />
+          </div>
+          <div class="input-group">
+            <label for="city">City / Location</label>
+            <input type="text" id="city" placeholder="e.g. Delhi, Mumbai, Bangalore…" autocomplete="off" />
+          </div>
+          <div class="input-group">
+            <label for="max_results">Max Results</label>
+            <select id="max_results">
+              <option value="10">10 leads</option>
+              <option value="20" selected>20 leads</option>
+              <option value="30">30 leads</option>
+            </select>
+          </div>
+        </div>
+        <button id="scrape-btn" class="btn btn-primary" onclick="startScrape()">
+          <span class="btn-icon">⚡</span>
+          <span id="btn-text">Scrape Leads</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ── PROGRESS ── -->
+    <section id="progress-section" class="progress-section hidden">
+      <div class="card glass progress-card">
+        <div class="spinner-ring"></div>
+        <p class="progress-text">Scanning Google Maps… this may take 30–90 seconds.</p>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ERROR ── -->
+    <section id="error-section" class="error-section hidden">
+      <div class="card glass error-card">
+        <span class="error-icon">⚠️</span>
+        <p id="error-msg">Something went wrong.</p>
+        <button class="btn btn-secondary" onclick="resetUI()">Try Again</button>
+      </div>
+    </section>
+
+    <!-- ── RESULTS ── -->
+    <section id="results-section" class="results-section hidden">
+      <div class="results-header">
+        <div class="lead-count">
+          <span class="count-num" id="lead-count">0</span>
+          <span class="count-label">Leads Found</span>
+        </div>
+        <div class="export-btns">
+          <a id="csv-btn" href="/download/csv" class="btn btn-export btn-csv">
+            ⬇ Download CSV
+          </a>
+          <a id="xlsx-btn" href="/download/excel" class="btn btn-export btn-xlsx">
+            📊 Download Excel
+          </a>
+          <button class="btn btn-secondary" onclick="resetUI()">New Search</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="leads-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th data-col="Name">Name ↕</th>
+              <th data-col="Category">Category ↕</th>
+              <th data-col="Phone">Phone</th>
+              <th data-col="Address">Address</th>
+              <th data-col="Rating">Rating ↕</th>
+              <th data-col="Reviews">Reviews ↕</th>
+              <th data-col="Website">Website</th>
+            </tr>
+          </thead>
+          <tbody id="leads-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── HOW IT WORKS ── -->
+    <section class="how-section">
+      <h2>How It Works</h2>
+      <div class="steps-grid">
+        <div class="step-card glass">
+          <div class="step-num">1</div>
+          <h3>Enter Your Search</h3>
+          <p>Type any business type (e.g. "plumbers") and your target city.</p>
+        </div>
+        <div class="step-card glass">
+          <div class="step-num">2</div>
+          <h3>AI Scrapes Google Maps</h3>
+          <p>Our headless browser visits Google Maps and extracts real data.</p>
+        </div>
+        <div class="step-card glass">
+          <div class="step-num">3</div>
+          <h3>Download Your Leads</h3>
+          <p>Export the full list as CSV or Excel — ready to use immediately.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>LeadHunter &copy; 2025 &mdash; Built with Flask &amp; Playwright</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
