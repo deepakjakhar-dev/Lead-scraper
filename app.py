@@ -4,7 +4,7 @@ import pandas as pd
 from flask import Flask, render_template, request, jsonify, send_file
 from scraper import scrape_google_maps
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
 
 # In-memory store for the last scrape result (simple single-user app)
 _last_results: list[dict] = []
